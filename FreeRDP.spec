@@ -4,7 +4,7 @@
 #
 Name     : FreeRDP
 Version  : 8d0809cf26868fc5ff651850a32724650597747f
-Release  : 1
+Release  : 2
 URL      : https://github.com/FreeRDP/FreeRDP/archive/8d0809cf26868fc5ff651850a32724650597747f.tar.gz
 Source0  : https://github.com/FreeRDP/FreeRDP/archive/8d0809cf26868fc5ff651850a32724650597747f.tar.gz
 Summary  : Free implementation of the Remote Desktop Protocol (RDP)
@@ -82,7 +82,7 @@ lib components for the FreeRDP package.
 export LANG=C
 mkdir clr-build
 pushd clr-build
-cmake .. -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_SHARED_LIBS:BOOL=ON -DLIB_INSTALL_DIR:PATH=%{_libdir} -DCMAKE_AR=/usr/bin/gcc-ar -DLIB_SUFFIX=64 -DCMAKE_RANLIB=/usr/bin/gcc-ranlib -DWITH_FFMPEG=OFF -DWITH_GSTREAMER_1_0=ON -DWITH_GSTREAMER_0_10=OFF
+cmake .. -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_SHARED_LIBS:BOOL=ON -DLIB_INSTALL_DIR:PATH=%{_libdir} -DCMAKE_AR=/usr/bin/gcc-ar -DLIB_SUFFIX=64 -DCMAKE_RANLIB=/usr/bin/gcc-ranlib -DWITH_FFMPEG=OFF
 make VERBOSE=1  %{?_smp_mflags}
 popd
 
