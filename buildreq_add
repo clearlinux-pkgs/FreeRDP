@@ -1,0 +1,16 @@
+# This file contains additional build requirements that did not get
+# picked up automatically. One name per line, no whitespace.
+glib-dev
+libjpeg-turbo-dev
+libpng-dev
+systemd-dev
+openssl-dev
+alsa-lib-dev
+libxkbfile-dev
+libxshmfence
+libSM-dev
+libxslt-dev
+gstreamer-dev
+gst-plugins-base
+gst-plugins-base-dev
+
