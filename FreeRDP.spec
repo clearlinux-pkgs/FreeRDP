@@ -4,7 +4,7 @@
 #
 Name     : FreeRDP
 Version  : 8d0809cf26868fc5ff651850a32724650597747f
-Release  : 4
+Release  : 5
 URL      : https://github.com/FreeRDP/FreeRDP/archive/8d0809cf26868fc5ff651850a32724650597747f.tar.gz
 Source0  : https://github.com/FreeRDP/FreeRDP/archive/8d0809cf26868fc5ff651850a32724650597747f.tar.gz
 Summary  : Free implementation of the Remote Desktop Protocol (RDP)
