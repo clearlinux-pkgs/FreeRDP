@@ -4,7 +4,7 @@
 #
 Name     : FreeRDP
 Version  : 2.0.0.rc2
-Release  : 12
+Release  : 13
 URL      : https://github.com/FreeRDP/FreeRDP/archive/2.0.0-rc2.tar.gz
 Source0  : https://github.com/FreeRDP/FreeRDP/archive/2.0.0-rc2.tar.gz
 Summary  : Free implementation of the Remote Desktop Protocol (RDP)
