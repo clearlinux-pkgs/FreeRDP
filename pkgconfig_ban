@@ -1,4 +1,9 @@
 # This file contains pkgconfig build requirements that get picked up
 # but are undesirable. One entry per line, no whitespace.
+OpenSLES
+gstreamer-0.10
 libavcodec
+libavresample
 libavutil
+libpcsclite
+openh264

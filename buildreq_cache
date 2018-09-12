@@ -1,0 +1,4 @@
+2.0.0.rc3
+libXcursor-dev
+libXinerama-dev
+pkgconfig(xcursor)

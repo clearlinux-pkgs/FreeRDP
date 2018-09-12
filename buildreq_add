@@ -10,6 +10,7 @@ libSM-dev
 libX11-dev
 libXdamage-dev
 libXext-dev
+libXi-dev
 libXv-dev
 libjpeg-turbo-dev
 libpng-dev
