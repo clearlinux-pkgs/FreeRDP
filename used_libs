@@ -11,7 +11,7 @@ libXrender.so.1
 libXv.so.1
 libasound.so.2
 libc.so.6
-libcrypto.so.1.0.0
+libcrypto.so.1.1
 libcups.so.2
 libdl.so.2
 libglib-2.0.so.0
@@ -25,7 +25,7 @@ libm.so.6
 libpthread.so.0
 libpulse.so.0
 librt.so.1
-libssl.so.1.0.0
+libssl.so.1.1
 libsystemd.so.0
 libwayland-client.so.0
 libxkbcommon.so.0

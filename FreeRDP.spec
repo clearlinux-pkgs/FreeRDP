@@ -4,16 +4,17 @@
 #
 Name     : FreeRDP
 Version  : 2.0.0.rc3
-Release  : 17
+Release  : 18
 URL      : https://github.com/FreeRDP/FreeRDP/archive/2.0.0-rc3.tar.gz
 Source0  : https://github.com/FreeRDP/FreeRDP/archive/2.0.0-rc3.tar.gz
 Summary  : Free implementation of the Remote Desktop Protocol (RDP)
 Group    : Development/Tools
 License  : Apache-2.0
-Requires: FreeRDP-bin
-Requires: FreeRDP-lib
-Requires: FreeRDP-license
-Requires: FreeRDP-man
+Requires: FreeRDP-bin = %{version}-%{release}
+Requires: FreeRDP-data = %{version}-%{release}
+Requires: FreeRDP-lib = %{version}-%{release}
+Requires: FreeRDP-license = %{version}-%{release}
+Requires: FreeRDP-man = %{version}-%{release}
 BuildRequires : alsa-lib-dev
 BuildRequires : buildreq-cmake
 BuildRequires : cups-dev
@@ -63,6 +64,7 @@ This package provides nightly master builds of all components.
 %package bin
 Summary: bin components for the FreeRDP package.
 Group: Binaries
+Requires: FreeRDP-data = %{version}-%{release}
 Requires: FreeRDP-license = %{version}-%{release}
 Requires: FreeRDP-man = %{version}-%{release}
 
@@ -70,29 +72,30 @@ Requires: FreeRDP-man = %{version}-%{release}
 bin components for the FreeRDP package.
 
 
+%package data
+Summary: data components for the FreeRDP package.
+Group: Data
+
+%description data
+data components for the FreeRDP package.
+
+
 %package dev
 Summary: dev components for the FreeRDP package.
 Group: Development
 Requires: FreeRDP-lib = %{version}-%{release}
 Requires: FreeRDP-bin = %{version}-%{release}
+Requires: FreeRDP-data = %{version}-%{release}
 Provides: FreeRDP-devel = %{version}-%{release}
 
 %description dev
 dev components for the FreeRDP package.
 
 
-%package doc
-Summary: doc components for the FreeRDP package.
-Group: Documentation
-Requires: FreeRDP-man = %{version}-%{release}
-
-%description doc
-doc components for the FreeRDP package.
-
-
 %package lib
 Summary: lib components for the FreeRDP package.
 Group: Libraries
+Requires: FreeRDP-data = %{version}-%{release}
 Requires: FreeRDP-license = %{version}-%{release}
 
 %description lib
@@ -124,7 +127,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1537211842
+export SOURCE_DATE_EPOCH=1541706935
 mkdir -p clr-build
 pushd clr-build
 %cmake .. -DWITH_ALSA=ON -DWITH_CHANNELS=ON -DWITH_CLIENT=ON -DWITH_CUPS=ON -DWITH_FFMPEG=OFF -DWITH_GSTREAMER_0_10=OFF -DWITH_GSTREAMER_1_0=ON -DWITH_JPEG=ON -DWITH_MANPAGES=ON -DWITH_OPENSSL=ON -DWITH_PULSE=ON -DWITH_SERVER=ON -DWITH_SHADOW_X11=ON -DWITH_SSE2=ON -DWITH_WAYLAND=ON -DWITH_X11=ON -DWITH_X264=OFF -DWITH_XCURSOR=ON -DWITH_XEXT=ON -DWITH_XI=ON -DWITH_XINERAMA=ON -DWITH_XKBFILE=ON -DWITH_XRENDER=ON -DWITH_XTEST=OFF -DWITH_XV=ON -DWITH_ZLIB=ON
@@ -132,13 +135,13 @@ make  %{?_smp_mflags} :|| cmake --build .
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1537211842
+export SOURCE_DATE_EPOCH=1541706935
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/FreeRDP
-cp LICENSE %{buildroot}/usr/share/doc/FreeRDP/LICENSE
-cp libfreerdp/core/license.c %{buildroot}/usr/share/doc/FreeRDP/libfreerdp_core_license.c
-cp libfreerdp/core/license.h %{buildroot}/usr/share/doc/FreeRDP/libfreerdp_core_license.h
-cp winpr/libwinpr/sysinfo/cpufeatures/NOTICE %{buildroot}/usr/share/doc/FreeRDP/winpr_libwinpr_sysinfo_cpufeatures_NOTICE
+mkdir -p %{buildroot}/usr/share/package-licenses/FreeRDP
+cp LICENSE %{buildroot}/usr/share/package-licenses/FreeRDP/LICENSE
+cp libfreerdp/core/license.c %{buildroot}/usr/share/package-licenses/FreeRDP/libfreerdp_core_license.c
+cp libfreerdp/core/license.h %{buildroot}/usr/share/package-licenses/FreeRDP/libfreerdp_core_license.h
+cp winpr/libwinpr/sysinfo/cpufeatures/NOTICE %{buildroot}/usr/share/package-licenses/FreeRDP/winpr_libwinpr_sysinfo_cpufeatures_NOTICE
 pushd clr-build
 %make_install
 popd
@@ -153,6 +156,25 @@ popd
 /usr/bin/winpr-makecert
 /usr/bin/wlfreerdp
 /usr/bin/xfreerdp
+
+%files data
+%defattr(-,root,root,-)
+/usr/share/abi/libfreerdp-client2.so.2.0.0.abi
+/usr/share/abi/libfreerdp-client2.so.2.abi
+/usr/share/abi/libfreerdp-server2.so.2.0.0.abi
+/usr/share/abi/libfreerdp-server2.so.2.abi
+/usr/share/abi/libfreerdp-shadow-subsystem2.so.2.0.0.abi
+/usr/share/abi/libfreerdp-shadow-subsystem2.so.2.abi
+/usr/share/abi/libfreerdp-shadow2.so.2.0.0.abi
+/usr/share/abi/libfreerdp-shadow2.so.2.abi
+/usr/share/abi/libfreerdp2.so.2.0.0.abi
+/usr/share/abi/libfreerdp2.so.2.abi
+/usr/share/abi/libuwac0.so.0.0.1.abi
+/usr/share/abi/libuwac0.so.0.abi
+/usr/share/abi/libwinpr-tools2.so.2.0.0.abi
+/usr/share/abi/libwinpr-tools2.so.2.abi
+/usr/share/abi/libwinpr2.so.2.0.0.abi
+/usr/share/abi/libwinpr2.so.2.abi
 
 %files dev
 %defattr(-,root,root,-)
@@ -395,10 +417,6 @@ popd
 /usr/lib64/pkgconfig/winpr-tools2.pc
 /usr/lib64/pkgconfig/winpr2.pc
 
-%files doc
-%defattr(0644,root,root,0755)
-%doc /usr/share/doc/FreeRDP/*
-
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libfreerdp-client2.so.2
@@ -419,13 +437,14 @@ popd
 /usr/lib64/libwinpr2.so.2.0.0
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/FreeRDP/LICENSE
-/usr/share/doc/FreeRDP/libfreerdp_core_license.c
-/usr/share/doc/FreeRDP/libfreerdp_core_license.h
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/FreeRDP/LICENSE
+/usr/share/package-licenses/FreeRDP/libfreerdp_core_license.c
+/usr/share/package-licenses/FreeRDP/libfreerdp_core_license.h
+/usr/share/package-licenses/FreeRDP/winpr_libwinpr_sysinfo_cpufeatures_NOTICE
 
 %files man
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/man/man1/freerdp-shadow-cli.1
 /usr/share/man/man1/winpr-hash.1
 /usr/share/man/man1/winpr-makecert.1
