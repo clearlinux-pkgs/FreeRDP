@@ -4,14 +4,13 @@
 #
 Name     : FreeRDP
 Version  : 2.0.0.rc3
-Release  : 18
+Release  : 19
 URL      : https://github.com/FreeRDP/FreeRDP/archive/2.0.0-rc3.tar.gz
 Source0  : https://github.com/FreeRDP/FreeRDP/archive/2.0.0-rc3.tar.gz
 Summary  : Free implementation of the Remote Desktop Protocol (RDP)
 Group    : Development/Tools
 License  : Apache-2.0
 Requires: FreeRDP-bin = %{version}-%{release}
-Requires: FreeRDP-data = %{version}-%{release}
 Requires: FreeRDP-lib = %{version}-%{release}
 Requires: FreeRDP-license = %{version}-%{release}
 Requires: FreeRDP-man = %{version}-%{release}
@@ -61,10 +60,17 @@ Patch1: 0001-No-rc4-v2.patch
 FreeRDP is a open and free implementation of the Remote Desktop Protocol (RDP).
 This package provides nightly master builds of all components.
 
+%package abi
+Summary: abi components for the FreeRDP package.
+Group: Default
+
+%description abi
+abi components for the FreeRDP package.
+
+
 %package bin
 Summary: bin components for the FreeRDP package.
 Group: Binaries
-Requires: FreeRDP-data = %{version}-%{release}
 Requires: FreeRDP-license = %{version}-%{release}
 Requires: FreeRDP-man = %{version}-%{release}
 
@@ -72,20 +78,11 @@ Requires: FreeRDP-man = %{version}-%{release}
 bin components for the FreeRDP package.
 
 
-%package data
-Summary: data components for the FreeRDP package.
-Group: Data
-
-%description data
-data components for the FreeRDP package.
-
-
 %package dev
 Summary: dev components for the FreeRDP package.
 Group: Development
 Requires: FreeRDP-lib = %{version}-%{release}
 Requires: FreeRDP-bin = %{version}-%{release}
-Requires: FreeRDP-data = %{version}-%{release}
 Provides: FreeRDP-devel = %{version}-%{release}
 
 %description dev
@@ -95,7 +92,6 @@ dev components for the FreeRDP package.
 %package lib
 Summary: lib components for the FreeRDP package.
 Group: Libraries
-Requires: FreeRDP-data = %{version}-%{release}
 Requires: FreeRDP-license = %{version}-%{release}
 
 %description lib
@@ -127,7 +123,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1541706935
+export SOURCE_DATE_EPOCH=1542395562
 mkdir -p clr-build
 pushd clr-build
 %cmake .. -DWITH_ALSA=ON -DWITH_CHANNELS=ON -DWITH_CLIENT=ON -DWITH_CUPS=ON -DWITH_FFMPEG=OFF -DWITH_GSTREAMER_0_10=OFF -DWITH_GSTREAMER_1_0=ON -DWITH_JPEG=ON -DWITH_MANPAGES=ON -DWITH_OPENSSL=ON -DWITH_PULSE=ON -DWITH_SERVER=ON -DWITH_SHADOW_X11=ON -DWITH_SSE2=ON -DWITH_WAYLAND=ON -DWITH_X11=ON -DWITH_X264=OFF -DWITH_XCURSOR=ON -DWITH_XEXT=ON -DWITH_XI=ON -DWITH_XINERAMA=ON -DWITH_XKBFILE=ON -DWITH_XRENDER=ON -DWITH_XTEST=OFF -DWITH_XV=ON -DWITH_ZLIB=ON
@@ -135,7 +131,7 @@ make  %{?_smp_mflags} :|| cmake --build .
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1541706935
+export SOURCE_DATE_EPOCH=1542395562
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/FreeRDP
 cp LICENSE %{buildroot}/usr/share/package-licenses/FreeRDP/LICENSE
@@ -149,6 +145,17 @@ popd
 %files
 %defattr(-,root,root,-)
 
+%files abi
+%defattr(-,root,root,-)
+/usr/share/abi/libfreerdp-client2.so.2.abi
+/usr/share/abi/libfreerdp-server2.so.2.abi
+/usr/share/abi/libfreerdp-shadow-subsystem2.so.2.abi
+/usr/share/abi/libfreerdp-shadow2.so.2.abi
+/usr/share/abi/libfreerdp2.so.2.abi
+/usr/share/abi/libuwac0.so.0.abi
+/usr/share/abi/libwinpr-tools2.so.2.abi
+/usr/share/abi/libwinpr2.so.2.abi
+
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/freerdp-shadow-cli
@@ -156,25 +163,6 @@ popd
 /usr/bin/winpr-makecert
 /usr/bin/wlfreerdp
 /usr/bin/xfreerdp
-
-%files data
-%defattr(-,root,root,-)
-/usr/share/abi/libfreerdp-client2.so.2.0.0.abi
-/usr/share/abi/libfreerdp-client2.so.2.abi
-/usr/share/abi/libfreerdp-server2.so.2.0.0.abi
-/usr/share/abi/libfreerdp-server2.so.2.abi
-/usr/share/abi/libfreerdp-shadow-subsystem2.so.2.0.0.abi
-/usr/share/abi/libfreerdp-shadow-subsystem2.so.2.abi
-/usr/share/abi/libfreerdp-shadow2.so.2.0.0.abi
-/usr/share/abi/libfreerdp-shadow2.so.2.abi
-/usr/share/abi/libfreerdp2.so.2.0.0.abi
-/usr/share/abi/libfreerdp2.so.2.abi
-/usr/share/abi/libuwac0.so.0.0.1.abi
-/usr/share/abi/libuwac0.so.0.abi
-/usr/share/abi/libwinpr-tools2.so.2.0.0.abi
-/usr/share/abi/libwinpr-tools2.so.2.abi
-/usr/share/abi/libwinpr2.so.2.0.0.abi
-/usr/share/abi/libwinpr2.so.2.abi
 
 %files dev
 %defattr(-,root,root,-)
