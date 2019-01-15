@@ -4,10 +4,10 @@
 #
 Name     : FreeRDP
 Version  : 2.0.0.rc4
-Release  : 22
+Release  : 23
 URL      : https://github.com/FreeRDP/FreeRDP/archive/2.0.0-rc4.tar.gz
 Source0  : https://github.com/FreeRDP/FreeRDP/archive/2.0.0-rc4.tar.gz
-Summary  : Free implementation of the Remote Desktop Protocol (RDP)
+Summary  : Free RDP client
 Group    : Development/Tools
 License  : Apache-2.0
 Requires: FreeRDP-bin = %{version}-%{release}
@@ -36,7 +36,7 @@ BuildRequires : libjpeg-turbo-dev
 BuildRequires : libpng-dev
 BuildRequires : libxkbfile-dev
 BuildRequires : libxml2-dev
-BuildRequires : libxshmfence
+BuildRequires : libxshmfence-dev
 BuildRequires : libxslt-dev
 BuildRequires : openssl-dev
 BuildRequires : pkg-config
@@ -115,15 +115,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1543527369
+export SOURCE_DATE_EPOCH=1547584041
 mkdir -p clr-build
 pushd clr-build
-%cmake .. -DWITH_ALSA=ON -DWITH_CHANNELS=ON -DWITH_CLIENT=ON -DWITH_CUPS=ON -DWITH_FFMPEG=OFF -DWITH_GSTREAMER_0_10=OFF -DWITH_GSTREAMER_1_0=ON -DWITH_JPEG=ON -DWITH_MANPAGES=ON -DWITH_OPENSSL=ON -DWITH_PULSE=ON -DWITH_SERVER=ON -DWITH_SHADOW_X11=ON -DWITH_SSE2=ON -DWITH_WAYLAND=ON -DWITH_X11=ON -DWITH_X264=OFF -DWITH_XCURSOR=ON -DWITH_XEXT=ON -DWITH_XI=ON -DWITH_XINERAMA=ON -DWITH_XKBFILE=ON -DWITH_XRENDER=ON -DWITH_XTEST=OFF -DWITH_XV=ON -DWITH_ZLIB=ON
+%cmake .. -DWITH_ALSA=ON -DWITH_CHANNELS=ON -DWITH_CLIENT=ON -DWITH_CUPS=ON -DWITH_FFMPEG=OFF -DWITH_GSTREAMER_0_10=OFF -DWITH_GSTREAMER_1_0=ON -DWITH_JPEG=ON -DWITH_MANPAGES=ON -DWITH_OPENSSL=ON -DWITH_PULSE=ON -DWITH_SERVER=ON -DWITH_SHADOW_X11=ON -DWITH_SSE2=ON -DWITH_WAYLAND=ON -DWITH_X11=ON -DWITH_X264=OFF -DWITH_XCURSOR=ON -DWITH_XEXT=ON -DWITH_XI=ON -DWITH_XINERAMA=ON -DWITH_XKBFILE=ON -DWITH_XRENDER=ON -DWITH_XTEST=OFF -DWITH_XV=ON -DWITH_ZLIB=ON -DWITH_SOXR=OFF
 make  %{?_smp_mflags} :|| cmake --build .
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1543527369
+export SOURCE_DATE_EPOCH=1547584041
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/FreeRDP
 cp LICENSE %{buildroot}/usr/share/package-licenses/FreeRDP/LICENSE

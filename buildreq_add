@@ -15,7 +15,7 @@ libXv-dev
 libjpeg-turbo-dev
 libpng-dev
 libxkbfile-dev
-libxshmfence
+libxshmfence-dev
 libxslt-dev
 openssl-dev
 systemd-dev
