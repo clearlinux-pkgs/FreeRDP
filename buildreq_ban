@@ -2,3 +2,5 @@
 # undesirable. One entry per line, no whitespace.
 pkgconfig(libswresample)
 pkgconfig(soxr)
+buildreq-mvn
+gradle

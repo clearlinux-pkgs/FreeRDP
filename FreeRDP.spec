@@ -4,10 +4,10 @@
 #
 Name     : FreeRDP
 Version  : 2.0.0.rc4
-Release  : 24
+Release  : 25
 URL      : https://github.com/FreeRDP/FreeRDP/archive/2.0.0-rc4.tar.gz
 Source0  : https://github.com/FreeRDP/FreeRDP/archive/2.0.0-rc4.tar.gz
-Summary  : Free RDP client
+Summary  : Free implementation of the Remote Desktop Protocol (RDP)
 Group    : Development/Tools
 License  : Apache-2.0
 Requires: FreeRDP-bin = %{version}-%{release}
@@ -43,7 +43,6 @@ BuildRequires : pkg-config
 BuildRequires : pkgconfig(dbus-1)
 BuildRequires : pkgconfig(dbus-glib-1)
 BuildRequires : pkgconfig(glib-2.0)
-BuildRequires : pkgconfig(gtk+-2.0)
 BuildRequires : pkgconfig(libpulse)
 BuildRequires : pkgconfig(libsystemd)
 BuildRequires : pkgconfig(openssl)
@@ -52,9 +51,9 @@ BuildRequires : pkgconfig(wayland-scanner)
 BuildRequires : pkgconfig(xcursor)
 BuildRequires : pkgconfig(xkbcommon)
 BuildRequires : pkgconfig(xrandr)
-BuildRequires : pkgconfig(xrender)
 BuildRequires : systemd-dev
 Patch1: 0001-No-rc4-v2.patch
+Patch2: CVE-2019-17177.patch
 
 %description
 FreeRDP is a open and free implementation of the Remote Desktop Protocol (RDP).
@@ -64,7 +63,6 @@ This package provides nightly master builds of all components.
 Summary: bin components for the FreeRDP package.
 Group: Binaries
 Requires: FreeRDP-license = %{version}-%{release}
-Requires: FreeRDP-man = %{version}-%{release}
 
 %description bin
 bin components for the FreeRDP package.
@@ -76,6 +74,7 @@ Group: Development
 Requires: FreeRDP-lib = %{version}-%{release}
 Requires: FreeRDP-bin = %{version}-%{release}
 Provides: FreeRDP-devel = %{version}-%{release}
+Requires: FreeRDP = %{version}-%{release}
 
 %description dev
 dev components for the FreeRDP package.
@@ -109,21 +108,27 @@ man components for the FreeRDP package.
 %prep
 %setup -q -n FreeRDP-2.0.0-rc4
 %patch1 -p1
+%patch2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1547584041
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1570633773
 mkdir -p clr-build
 pushd clr-build
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 %cmake .. -DWITH_ALSA=ON -DWITH_CHANNELS=ON -DWITH_CLIENT=ON -DWITH_CUPS=ON -DWITH_FFMPEG=OFF -DWITH_GSTREAMER_0_10=OFF -DWITH_GSTREAMER_1_0=ON -DWITH_JPEG=ON -DWITH_MANPAGES=ON -DWITH_OPENSSL=ON -DWITH_PULSE=ON -DWITH_SERVER=ON -DWITH_SHADOW_X11=ON -DWITH_SSE2=ON -DWITH_WAYLAND=ON -DWITH_X11=ON -DWITH_X264=OFF -DWITH_XCURSOR=ON -DWITH_XEXT=ON -DWITH_XI=ON -DWITH_XINERAMA=ON -DWITH_XKBFILE=ON -DWITH_XRENDER=ON -DWITH_XTEST=OFF -DWITH_XV=ON -DWITH_ZLIB=ON -DWITH_SOXR=OFF
-make  %{?_smp_mflags} :|| cmake --build .
+make  %{?_smp_mflags}  :|| cmake --build .
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1547584041
+export SOURCE_DATE_EPOCH=1570633773
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/FreeRDP
 cp LICENSE %{buildroot}/usr/share/package-licenses/FreeRDP/LICENSE
