@@ -2,20 +2,26 @@
 # picked up automatically. One name per line, no whitespace.
 alsa-lib-dev
 cups-dev
+docbook-xml
 glib-dev
 gst-plugins-base
 gst-plugins-base-dev
 gstreamer-dev
 libSM-dev
 libX11-dev
+libXcursor-dev
 libXdamage-dev
 libXext-dev
 libXi-dev
+libXinerama-dev
 libXv-dev
 libjpeg-turbo-dev
 libpng-dev
+libusb-dev
 libxkbfile-dev
 libxshmfence-dev
 libxslt-dev
 openssl-dev
+pcsc-lite-dev
+pkgconfig(xcursor)
 systemd-dev

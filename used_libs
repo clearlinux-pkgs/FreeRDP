@@ -1,18 +1,11 @@
 ld-linux-x86-64.so.2
 libX11.so.6
 libXcursor.so.1
-libXv.so.1
 libasound.so.2
 libc.so.6
 libcrypto.so.1.1
 libcups.so.2
 libdl.so.2
-libglib-2.0.so.0
-libgobject-2.0.so.0
-libgstapp-1.0.so.0
-libgstbase-1.0.so.0
-libgstreamer-1.0.so.0
-libgstvideo-1.0.so.0
 libjpeg.so.62
 libm.so.6
 libpthread.so.0
@@ -20,6 +13,8 @@ libpulse.so.0
 librt.so.1
 libssl.so.1.1
 libsystemd.so.0
+libusb-1.0.so.0
 libwayland-client.so.0
+libwayland-cursor.so.0
 libxkbcommon.so.0
 libxkbfile.so.1

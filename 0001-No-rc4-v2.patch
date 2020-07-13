@@ -1,4 +1,4 @@
-From 1d8e32f64a9c4575f2d824462d63a064a2417375 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Athenas Jimenez Gonzalez <athenas.jimenez.gonzalez@intel.com>
 Date: Mon, 23 Apr 2018 20:26:33 +0000
 Subject: [PATCH] No  rc4 v2
@@ -10,12 +10,14 @@ vulnerabilities.
 Until the creation of this patch there is no a better way to disable the use
 of RC4. For more information please refer to:
 https://github.com/FreeRDP/FreeRDP/issues/3256
+
+Signed-off-by: Patrick McCarty <patrick.mccarty@intel.com>
 ---
- winpr/libwinpr/crypto/cipher.c | 34 +++-------------------------------
- 1 file changed, 3 insertions(+), 31 deletions(-)
+ winpr/libwinpr/crypto/cipher.c | 37 +++-------------------------------
+ 1 file changed, 3 insertions(+), 34 deletions(-)
 
 diff --git a/winpr/libwinpr/crypto/cipher.c b/winpr/libwinpr/crypto/cipher.c
-index f1e4290..6b60633 100644
+index 5fbe59b..fd22195 100644
 --- a/winpr/libwinpr/crypto/cipher.c
 +++ b/winpr/libwinpr/crypto/cipher.c
 @@ -26,7 +26,6 @@
@@ -26,13 +28,20 @@ index f1e4290..6b60633 100644
  #include <openssl/des.h>
  #include <openssl/evp.h>
  #endif
-@@ -53,28 +52,7 @@ WINPR_RC4_CTX* winpr_RC4_New_Internal(const BYTE* key, size_t keylen, BOOL overr
+@@ -46,35 +45,11 @@
+ static WINPR_RC4_CTX* winpr_RC4_New_Internal(const BYTE* key, size_t keylen, BOOL override_fips)
+ {
+ 	WINPR_RC4_CTX* ctx = NULL;
+-#if defined(WITH_OPENSSL)
+-	const EVP_CIPHER* evp = NULL;
+-#endif
+ 
  	if (!key || (keylen == 0))
  		return NULL;
  
 -#if defined(WITH_OPENSSL)
 -
--	if (!(ctx = (WINPR_RC4_CTX*) EVP_CIPHER_CTX_new()))
+-	if (!(ctx = (WINPR_RC4_CTX*)EVP_CIPHER_CTX_new()))
 -		return NULL;
 -
 -	evp = EVP_rc4();
@@ -40,46 +49,43 @@ index f1e4290..6b60633 100644
 -	if (!evp)
 -		return NULL;
 -
--	EVP_CIPHER_CTX_init((EVP_CIPHER_CTX*) ctx);
--	EVP_EncryptInit_ex((EVP_CIPHER_CTX*) ctx, evp, NULL, NULL, NULL);
+-	EVP_CIPHER_CTX_init((EVP_CIPHER_CTX*)ctx);
+-	EVP_EncryptInit_ex((EVP_CIPHER_CTX*)ctx, evp, NULL, NULL, NULL);
 -	/* EVP_CIPH_FLAG_NON_FIPS_ALLOW does not exist before openssl 1.0.1 */
 -#if !(OPENSSL_VERSION_NUMBER < 0x10001000L)
 -
 -	if (override_fips == TRUE)
--		EVP_CIPHER_CTX_set_flags((EVP_CIPHER_CTX*) ctx, EVP_CIPH_FLAG_NON_FIPS_ALLOW);
+-		EVP_CIPHER_CTX_set_flags((EVP_CIPHER_CTX*)ctx, EVP_CIPH_FLAG_NON_FIPS_ALLOW);
 -
 -#endif
--	EVP_CIPHER_CTX_set_key_length((EVP_CIPHER_CTX*) ctx, keylen);
--	EVP_EncryptInit_ex((EVP_CIPHER_CTX*) ctx, NULL, NULL, key, NULL);
+-	EVP_CIPHER_CTX_set_key_length((EVP_CIPHER_CTX*)ctx, keylen);
+-	EVP_EncryptInit_ex((EVP_CIPHER_CTX*)ctx, NULL, NULL, key, NULL);
 -#elif defined(WITH_MBEDTLS) && defined(MBEDTLS_ARC4_C)
 +#if defined(WITH_MBEDTLS) && defined(MBEDTLS_ARC4_C)
  
- 	if (!(ctx = (WINPR_RC4_CTX*) calloc(1, sizeof(mbedtls_arc4_context))))
+ 	if (!(ctx = (WINPR_RC4_CTX*)calloc(1, sizeof(mbedtls_arc4_context))))
  		return NULL;
-@@ -97,11 +75,7 @@ WINPR_RC4_CTX* winpr_RC4_New(const BYTE* key, size_t keylen)
+@@ -97,11 +72,7 @@ WINPR_RC4_CTX* winpr_RC4_New(const BYTE* key, size_t keylen)
  
  BOOL winpr_RC4_Update(WINPR_RC4_CTX* ctx, size_t length, const BYTE* input, BYTE* output)
  {
 -#if defined(WITH_OPENSSL)
 -	int outputLength;
--	EVP_CipherUpdate((EVP_CIPHER_CTX*) ctx, output, &outputLength, input, length);
+-	EVP_CipherUpdate((EVP_CIPHER_CTX*)ctx, output, &outputLength, input, length);
 -	return TRUE;
 -#elif defined(WITH_MBEDTLS) && defined(MBEDTLS_ARC4_C)
 +#if defined(WITH_MBEDTLS) && defined(MBEDTLS_ARC4_C)
  
- 	if (mbedtls_arc4_crypt((mbedtls_arc4_context*) ctx, length, input, output) == 0)
+ 	if (mbedtls_arc4_crypt((mbedtls_arc4_context*)ctx, length, input, output) == 0)
  		return TRUE;
-@@ -115,9 +89,7 @@ void winpr_RC4_Free(WINPR_RC4_CTX* ctx)
+@@ -115,9 +86,7 @@ void winpr_RC4_Free(WINPR_RC4_CTX* ctx)
  	if (!ctx)
  		return;
  
 -#if defined(WITH_OPENSSL)
--	EVP_CIPHER_CTX_free((EVP_CIPHER_CTX*) ctx);
+-	EVP_CIPHER_CTX_free((EVP_CIPHER_CTX*)ctx);
 -#elif defined(WITH_MBEDTLS) && defined(MBEDTLS_ARC4_C)
 +#if defined(WITH_MBEDTLS) && defined(MBEDTLS_ARC4_C)
- 	mbedtls_arc4_free((mbedtls_arc4_context*) ctx);
+ 	mbedtls_arc4_free((mbedtls_arc4_context*)ctx);
  	free(ctx);
  #endif
--- 
-2.17.0
-
