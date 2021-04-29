@@ -4,7 +4,7 @@
 #
 Name     : FreeRDP
 Version  : 2.3.2
-Release  : 29
+Release  : 30
 URL      : https://github.com/FreeRDP/FreeRDP/archive/2.3.2/FreeRDP-2.3.2.tar.gz
 Source0  : https://github.com/FreeRDP/FreeRDP/archive/2.3.2/FreeRDP-2.3.2.tar.gz
 Summary  : Free implementation of the Remote Desktop Protocol (RDP)
@@ -124,10 +124,10 @@ export SOURCE_DATE_EPOCH=1615848156
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
-export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
+export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
+export FFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
+export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
 %cmake .. -DWITH_ALSA=ON \
 -DWITH_CHANNELS=ON \
 -DWITH_CLIENT=ON \
