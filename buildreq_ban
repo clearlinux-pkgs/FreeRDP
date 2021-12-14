@@ -4,3 +4,4 @@ buildreq-mvn
 gradle
 pkgconfig(libswresample)
 pkgconfig(soxr)
+pypi(opencv_python)

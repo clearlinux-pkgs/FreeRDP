@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-From: Athenas Jimenez Gonzalez <athenas.jimenez.gonzalez@intel.com>
-Date: Mon, 23 Apr 2018 20:26:33 +0000
-Subject: [PATCH] No  rc4 v2
+From 12d9a53de69ea1006f872deff863eefa69c9bb5d Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Tue, 14 Dec 2021 10:13:14 -0800
+Subject: [PATCH] No rc4 v2
 
 This patch prevents the use of RC4 (encryption algorithm) during crypto
 process. Remove RC4 support is desirable due its several security
@@ -11,13 +11,13 @@ Until the creation of this patch there is no a better way to disable the use
 of RC4. For more information please refer to:
 https://github.com/FreeRDP/FreeRDP/issues/3256
 
-Signed-off-by: Patrick McCarty <patrick.mccarty@intel.com>
+Signed-off-by: William Douglas <william.douglas@intel.com>
 ---
- winpr/libwinpr/crypto/cipher.c | 37 +++-------------------------------
- 1 file changed, 3 insertions(+), 34 deletions(-)
+ winpr/libwinpr/crypto/cipher.c | 54 ++--------------------------------
+ 1 file changed, 3 insertions(+), 51 deletions(-)
 
 diff --git a/winpr/libwinpr/crypto/cipher.c b/winpr/libwinpr/crypto/cipher.c
-index 5fbe59b..fd22195 100644
+index e2477f3..ad08491 100644
 --- a/winpr/libwinpr/crypto/cipher.c
 +++ b/winpr/libwinpr/crypto/cipher.c
 @@ -26,7 +26,6 @@
@@ -27,8 +27,8 @@ index 5fbe59b..fd22195 100644
 -#include <openssl/rc4.h>
  #include <openssl/des.h>
  #include <openssl/evp.h>
- #endif
-@@ -46,35 +45,11 @@
+ #if defined(OPENSSL_VERSION_MAJOR) && (OPENSSL_VERSION_MAJOR >= 3)
+@@ -49,52 +48,11 @@
  static WINPR_RC4_CTX* winpr_RC4_New_Internal(const BYTE* key, size_t keylen, BOOL override_fips)
  {
  	WINPR_RC4_CTX* ctx = NULL;
@@ -41,6 +41,14 @@ index 5fbe59b..fd22195 100644
  
 -#if defined(WITH_OPENSSL)
 -
+-	if (keylen > INT_MAX)
+-		return NULL;
+-
+-#if defined(OPENSSL_VERSION_MAJOR) && (OPENSSL_VERSION_MAJOR >= 3)
+-	if (OSSL_PROVIDER_load(NULL, "legacy") == NULL)
+-		return NULL;
+-#endif
+-
 -	if (!(ctx = (WINPR_RC4_CTX*)EVP_CIPHER_CTX_new()))
 -		return NULL;
 -
@@ -50,7 +58,12 @@ index 5fbe59b..fd22195 100644
 -		return NULL;
 -
 -	EVP_CIPHER_CTX_init((EVP_CIPHER_CTX*)ctx);
--	EVP_EncryptInit_ex((EVP_CIPHER_CTX*)ctx, evp, NULL, NULL, NULL);
+-	if (EVP_EncryptInit_ex((EVP_CIPHER_CTX*)ctx, evp, NULL, NULL, NULL) != 1)
+-	{
+-		EVP_CIPHER_CTX_free ((EVP_CIPHER_CTX*)ctx);
+-		return NULL;
+-	}
+-
 -	/* EVP_CIPH_FLAG_NON_FIPS_ALLOW does not exist before openssl 1.0.1 */
 -#if !(OPENSSL_VERSION_NUMBER < 0x10001000L)
 -
@@ -58,14 +71,18 @@ index 5fbe59b..fd22195 100644
 -		EVP_CIPHER_CTX_set_flags((EVP_CIPHER_CTX*)ctx, EVP_CIPH_FLAG_NON_FIPS_ALLOW);
 -
 -#endif
--	EVP_CIPHER_CTX_set_key_length((EVP_CIPHER_CTX*)ctx, keylen);
--	EVP_EncryptInit_ex((EVP_CIPHER_CTX*)ctx, NULL, NULL, key, NULL);
+-	EVP_CIPHER_CTX_set_key_length((EVP_CIPHER_CTX*)ctx, (int)keylen);
+-	if (EVP_EncryptInit_ex((EVP_CIPHER_CTX*)ctx, NULL, NULL, key, NULL) != 1)
+-	{
+-		EVP_CIPHER_CTX_free ((EVP_CIPHER_CTX*)ctx);
+-		return NULL;
+-	}
 -#elif defined(WITH_MBEDTLS) && defined(MBEDTLS_ARC4_C)
 +#if defined(WITH_MBEDTLS) && defined(MBEDTLS_ARC4_C)
  
  	if (!(ctx = (WINPR_RC4_CTX*)calloc(1, sizeof(mbedtls_arc4_context))))
  		return NULL;
-@@ -97,11 +72,7 @@ WINPR_RC4_CTX* winpr_RC4_New(const BYTE* key, size_t keylen)
+@@ -117,11 +75,7 @@ WINPR_RC4_CTX* winpr_RC4_New(const BYTE* key, size_t keylen)
  
  BOOL winpr_RC4_Update(WINPR_RC4_CTX* ctx, size_t length, const BYTE* input, BYTE* output)
  {
@@ -78,7 +95,7 @@ index 5fbe59b..fd22195 100644
  
  	if (mbedtls_arc4_crypt((mbedtls_arc4_context*)ctx, length, input, output) == 0)
  		return TRUE;
-@@ -115,9 +86,7 @@ void winpr_RC4_Free(WINPR_RC4_CTX* ctx)
+@@ -135,9 +89,7 @@ void winpr_RC4_Free(WINPR_RC4_CTX* ctx)
  	if (!ctx)
  		return;
  
@@ -89,3 +106,6 @@ index 5fbe59b..fd22195 100644
  	mbedtls_arc4_free((mbedtls_arc4_context*)ctx);
  	free(ctx);
  #endif
+-- 
+2.34.1
+
