@@ -8,9 +8,6 @@ libfreerdp-client2.so.2:client_cli_verify_certificate
 libfreerdp-client2.so.2:client_cli_verify_certificate_ex
 libfreerdp-client2.so.2:client_cli_verify_changed_certificate
 libfreerdp-client2.so.2:client_cli_verify_changed_certificate_ex
-libfreerdp-client2.so.2:cliprdr_parse_file_list
-libfreerdp-client2.so.2:cliprdr_serialize_file_list
-libfreerdp-client2.so.2:cliprdr_serialize_file_list_ex
 libfreerdp-client2.so.2:del_device
 libfreerdp-client2.so.2:freerdp_channels_addin_list_free
 libfreerdp-client2.so.2:freerdp_channels_client_find_static_entry
@@ -71,8 +68,14 @@ libfreerdp-client2.so.2:msusb_msinterface_write
 libfreerdp-client2.so.2:msusb_mspipes_replace
 libfreerdp-client2.so.2:rdpgfx_client_context_free
 libfreerdp-client2.so.2:rdpgfx_client_context_new
+libfreerdp-server2.so.2:ainput_server_context_free
+libfreerdp-server2.so.2:ainput_server_context_new
 libfreerdp-server2.so.2:audin_server_context_free
 libfreerdp-server2.so.2:audin_server_context_new
+libfreerdp-server2.so.2:cam_dev_enum_server_context_free
+libfreerdp-server2.so.2:cam_dev_enum_server_context_new
+libfreerdp-server2.so.2:camera_device_server_context_free
+libfreerdp-server2.so.2:camera_device_server_context_new
 libfreerdp-server2.so.2:cliprdr_server_context_free
 libfreerdp-server2.so.2:cliprdr_server_context_new
 libfreerdp-server2.so.2:disp_server_context_free
@@ -112,6 +115,8 @@ libfreerdp-server2.so.2:remdesk_server_context_free
 libfreerdp-server2.so.2:remdesk_server_context_new
 libfreerdp-server2.so.2:server_audin_get_formats
 libfreerdp-server2.so.2:server_rdpsnd_get_formats
+libfreerdp-server2.so.2:telemetry_server_context_free
+libfreerdp-server2.so.2:telemetry_server_context_new
 libfreerdp-shadow-subsystem2.so.2:X11_ShadowSubsystemEntry
 libfreerdp-shadow-subsystem2.so.2:shadow_subsystem_set_entry_builtin
 libfreerdp-shadow2.so.2:shadow_capture_align_clip_rect
@@ -143,9 +148,12 @@ libfreerdp2.so.2:Pointer_Alloc
 libfreerdp2.so.2:WTSChannelGetHandleById
 libfreerdp2.so.2:WTSChannelGetHandleByName
 libfreerdp2.so.2:WTSChannelGetId
+libfreerdp2.so.2:WTSChannelGetIdByHandle
 libfreerdp2.so.2:WTSChannelGetName
+libfreerdp2.so.2:WTSChannelGetOptions
 libfreerdp2.so.2:WTSChannelSetHandleById
 libfreerdp2.so.2:WTSChannelSetHandleByName
+libfreerdp2.so.2:WTSGetAcceptedChannelNames
 libfreerdp2.so.2:WTSIsChannelJoinedById
 libfreerdp2.so.2:WTSIsChannelJoinedByName
 libfreerdp2.so.2:WTSVirtualChannelManagerCheckFileDescriptor
@@ -153,6 +161,7 @@ libfreerdp2.so.2:WTSVirtualChannelManagerGetDrdynvcState
 libfreerdp2.so.2:WTSVirtualChannelManagerGetEventHandle
 libfreerdp2.so.2:WTSVirtualChannelManagerGetFileDescriptor
 libfreerdp2.so.2:WTSVirtualChannelManagerIsChannelJoined
+libfreerdp2.so.2:WTSVirtualChannelManagerSetDVCCreationCallback
 libfreerdp2.so.2:_ber_sizeof_length
 libfreerdp2.so.2:_der_skip_length
 libfreerdp2.so.2:_er_skip_length
@@ -226,6 +235,9 @@ libfreerdp2.so.2:clear_context_free
 libfreerdp2.so.2:clear_context_new
 libfreerdp2.so.2:clear_context_reset
 libfreerdp2.so.2:clear_decompress
+libfreerdp2.so.2:cliprdr_parse_file_list
+libfreerdp2.so.2:cliprdr_serialize_file_list
+libfreerdp2.so.2:cliprdr_serialize_file_list_ex
 libfreerdp2.so.2:codecs_free
 libfreerdp2.so.2:codecs_new
 libfreerdp2.so.2:crypto_base64_decode
@@ -237,6 +249,7 @@ libfreerdp2.so.2:crypto_cert_free
 libfreerdp2.so.2:crypto_cert_get_dns_names
 libfreerdp2.so.2:crypto_cert_get_email
 libfreerdp2.so.2:crypto_cert_get_public_key
+libfreerdp2.so.2:crypto_cert_get_signature_alg
 libfreerdp2.so.2:crypto_cert_get_upn
 libfreerdp2.so.2:crypto_cert_hash
 libfreerdp2.so.2:crypto_cert_issuer
@@ -390,6 +403,7 @@ libfreerdp2.so.2:freerdp_get_param_int
 libfreerdp2.so.2:freerdp_get_param_string
 libfreerdp2.so.2:freerdp_get_param_uint32
 libfreerdp2.so.2:freerdp_get_param_uint64
+libfreerdp2.so.2:freerdp_get_state
 libfreerdp2.so.2:freerdp_get_stats
 libfreerdp2.so.2:freerdp_get_system_locale_id
 libfreerdp2.so.2:freerdp_get_system_locale_name_from_id
@@ -438,9 +452,12 @@ libfreerdp2.so.2:freerdp_peer_context_free
 libfreerdp2.so.2:freerdp_peer_context_new
 libfreerdp2.so.2:freerdp_peer_free
 libfreerdp2.so.2:freerdp_peer_new
+libfreerdp2.so.2:freerdp_peer_os_major_type_string
+libfreerdp2.so.2:freerdp_peer_os_minor_type_string
 libfreerdp2.so.2:freerdp_performance_flags_make
 libfreerdp2.so.2:freerdp_performance_flags_split
 libfreerdp2.so.2:freerdp_planar_switch_bgr
+libfreerdp2.so.2:freerdp_rail_support_flags_to_string
 libfreerdp2.so.2:freerdp_reconnect
 libfreerdp2.so.2:freerdp_register_addin_provider
 libfreerdp2.so.2:freerdp_send_error_info
@@ -481,10 +498,12 @@ libfreerdp2.so.2:freerdp_settings_set_uint32
 libfreerdp2.so.2:freerdp_settings_set_uint64
 libfreerdp2.so.2:freerdp_settings_set_value_for_name
 libfreerdp2.so.2:freerdp_shall_disconnect
+libfreerdp2.so.2:freerdp_state_string
 libfreerdp2.so.2:freerdp_static_channel_clone
 libfreerdp2.so.2:freerdp_static_channel_collection_add
 libfreerdp2.so.2:freerdp_static_channel_collection_find
 libfreerdp2.so.2:freerdp_static_channel_collection_free
+libfreerdp2.so.2:freerdp_target_net_addresses_copy
 libfreerdp2.so.2:freerdp_target_net_addresses_free
 libfreerdp2.so.2:freerdp_update_gateway_usage_method
 libfreerdp2.so.2:gdi_BitBlt
@@ -653,6 +672,7 @@ libfreerdp2.so.2:progressive_decompress
 libfreerdp2.so.2:progressive_decompress_ex
 libfreerdp2.so.2:progressive_delete_surface_context
 libfreerdp2.so.2:rail_read_unicode_string
+libfreerdp2.so.2:rdp_redirection_flags_to_string
 libfreerdp2.so.2:rectangle_is_empty
 libfreerdp2.so.2:rectangles_equal
 libfreerdp2.so.2:rectangles_intersection
@@ -756,6 +776,7 @@ libuwac0.so.0:UwacWindowAddDamage
 libuwac0.so.0:UwacWindowGetDrawingBuffer
 libuwac0.so.0:UwacWindowGetDrawingBufferGeometry
 libuwac0.so.0:UwacWindowGetGeometry
+libuwac0.so.0:UwacWindowSetAppId
 libuwac0.so.0:UwacWindowSetFullscreenState
 libuwac0.so.0:UwacWindowSetInputRegion
 libuwac0.so.0:UwacWindowSetOpaqueRegion
@@ -861,6 +882,7 @@ libwinpr2.so.2:CertEnumCertificatesInStore
 libwinpr2.so.2:CertFindCertificateInStore
 libwinpr2.so.2:CertGetNameStringA
 libwinpr2.so.2:CertGetNameStringW
+libwinpr2.so.2:CertOpenStore
 libwinpr2.so.2:CertOpenSystemStoreA
 libwinpr2.so.2:CertOpenSystemStoreW
 libwinpr2.so.2:ChangeTimerQueueTimer
@@ -1010,8 +1032,12 @@ libwinpr2.so.2:CredWriteA
 libwinpr2.so.2:CredWriteDomainCredentialsA
 libwinpr2.so.2:CredWriteDomainCredentialsW
 libwinpr2.so.2:CredWriteW
+libwinpr2.so.2:CryptBinaryToStringA
+libwinpr2.so.2:CryptBinaryToStringW
 libwinpr2.so.2:CryptProtectData
 libwinpr2.so.2:CryptProtectMemory
+libwinpr2.so.2:CryptStringToBinaryA
+libwinpr2.so.2:CryptStringToBinaryW
 libwinpr2.so.2:CryptUnprotectData
 libwinpr2.so.2:CryptUnprotectMemory
 libwinpr2.so.2:DceErrorInqTextA
@@ -1036,6 +1062,7 @@ libwinpr2.so.2:DsCrackSpnA
 libwinpr2.so.2:DsCrackSpnW
 libwinpr2.so.2:DsMakeSpnA
 libwinpr2.so.2:DsMakeSpnW
+libwinpr2.so.2:DumpThreadHandles
 libwinpr2.so.2:DuplicateHandle
 libwinpr2.so.2:EncryptMessage
 libwinpr2.so.2:EnterCriticalSection
@@ -1065,6 +1092,8 @@ libwinpr2.so.2:FindWindowExW
 libwinpr2.so.2:FindWindowW
 libwinpr2.so.2:FlushFileBuffers
 libwinpr2.so.2:FlushViewOfFile
+libwinpr2.so.2:FormatMessageA
+libwinpr2.so.2:FormatMessageW
 libwinpr2.so.2:FreeContextBuffer
 libwinpr2.so.2:FreeCredentialsHandle
 libwinpr2.so.2:FreeEnvironmentStringsA
@@ -1810,6 +1839,10 @@ libwinpr2.so.2:StreamPool_Release
 libwinpr2.so.2:StreamPool_Return
 libwinpr2.so.2:StreamPool_Take
 libwinpr2.so.2:Stream_AddRef
+libwinpr2.so.2:Stream_CheckAndLogRequiredLengthEx
+libwinpr2.so.2:Stream_CheckAndLogRequiredLengthExVa
+libwinpr2.so.2:Stream_CheckAndLogRequiredLengthWLogEx
+libwinpr2.so.2:Stream_CheckAndLogRequiredLengthWLogExVa
 libwinpr2.so.2:Stream_EnsureCapacity
 libwinpr2.so.2:Stream_EnsureRemainingCapacity
 libwinpr2.so.2:Stream_Free
@@ -2070,8 +2103,10 @@ libwinpr2.so.2:_wcschr
 libwinpr2.so.2:_wcscmp
 libwinpr2.so.2:_wcsdup
 libwinpr2.so.2:_wcslen
+libwinpr2.so.2:_wcsncmp
 libwinpr2.so.2:_wcsnlen
 libwinpr2.so.2:_wcsrchr
+libwinpr2.so.2:_wcsstr
 libwinpr2.so.2:closesocket
 libwinpr2.so.2:lstrcmpA
 libwinpr2.so.2:lstrcmpW
@@ -2190,6 +2225,7 @@ libwinpr2.so.2:winpr_log_backtrace
 libwinpr2.so.2:winpr_log_backtrace_ex
 libwinpr2.so.2:winpr_md_type_from_string
 libwinpr2.so.2:winpr_md_type_to_string
+libwinpr2.so.2:winpr_str_append
 libwinpr2.so.2:winpr_strerror
 libwinpr2.so.2:wmemmove_s
 libwinpr2.so.2:wprintfx

@@ -1,5 +1,5 @@
 PKG_NAME := FreeRDP
-URL = https://github.com/FreeRDP/FreeRDP/archive/2.4.1/FreeRDP-2.4.1.tar.gz
+URL = https://github.com/FreeRDP/FreeRDP/releases/download/2.10.0/freerdp-2.10.0.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common

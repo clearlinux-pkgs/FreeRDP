@@ -1,0 +1,11 @@
+--- freerdp-2.10.0/winpr/libwinpr/crypto/cipher.c~	2023-02-16 09:55:03.000000000 +0000
++++ freerdp-2.10.0/winpr/libwinpr/crypto/cipher.c	2023-03-30 19:37:40.823016226 +0000
+@@ -61,7 +61,7 @@
+ 	if (!(ctx = (WINPR_RC4_CTX*)EVP_CIPHER_CTX_new()))
+ 		return NULL;
+ 
+-	evp = EVP_rc4();
++	evp = NULL;
+ 
+ 	if (!evp)
+ 		return NULL;
