@@ -5,7 +5,7 @@
 #
 Name     : FreeRDP
 Version  : 2.10.0
-Release  : 34
+Release  : 35
 URL      : https://github.com/FreeRDP/FreeRDP/releases/download/2.10.0/freerdp-2.10.0.tar.gz
 Source0  : https://github.com/FreeRDP/FreeRDP/releases/download/2.10.0/freerdp-2.10.0.tar.gz
 Summary  : Free implementation of the Remote Desktop Protocol (RDP)
@@ -125,14 +125,56 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1680205159
+export SOURCE_DATE_EPOCH=1683653429
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+%cmake .. -DWITH_ALSA=ON \
+-DWITH_CHANNELS=ON \
+-DWITH_CLIENT=ON \
+-DWITH_CLIENT_CHANNELS=ON \
+-DWITH_CUPS=ON \
+-DWITH_FFMPEG=OFF \
+-DWITH_GSTREAMER_0_10=OFF \
+-DWITH_GSTREAMER_1_0=ON \
+-DWITH_JPEG=ON \
+-DWITH_MANPAGES=ON \
+-DWITH_OPENSSL=ON \
+-DWITH_PULSE=ON \
+-DWITH_SERVER=ON \
+-DWITH_SERVER_CHANNELS=ON \
+-DWITH_SHADOW_X11=ON \
+-DWITH_SOXR=OFF \
+-DWITH_SSE2=ON \
+-DWITH_WAYLAND=ON \
+-DWITH_X11=ON \
+-DWITH_X264=OFF \
+-DWITH_XCURSOR=ON \
+-DWITH_XEXT=ON \
+-DWITH_XI=ON \
+-DWITH_XINERAMA=ON \
+-DWITH_XKBFILE=ON \
+-DWITH_XRENDER=ON \
+-DWITH_XTEST=OFF \
+-DWITH_XV=ON \
+-DWITH_ZLIB=ON
+make  %{?_smp_mflags}
+popd
+mkdir -p clr-build-avx2
+pushd clr-build-avx2
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export CFLAGS="$CFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 %cmake .. -DWITH_ALSA=ON \
 -DWITH_CHANNELS=ON \
 -DWITH_CLIENT=ON \
@@ -166,20 +208,30 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1680205159
+export SOURCE_DATE_EPOCH=1683653429
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/FreeRDP
 cp %{_builddir}/freerdp-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/FreeRDP/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
 cp %{_builddir}/freerdp-%{version}/winpr/libwinpr/sysinfo/cpufeatures/NOTICE %{buildroot}/usr/share/package-licenses/FreeRDP/ec4468ecfe59c46406d4fc5aca1cee2a83c4d93e || :
+pushd clr-build-avx2
+%make_install_v3  || :
+popd
 pushd clr-build
 %make_install
 popd
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
 
 %files bin
 %defattr(-,root,root,-)
+/V3/usr/bin/freerdp-proxy
+/V3/usr/bin/freerdp-shadow-cli
+/V3/usr/bin/winpr-hash
+/V3/usr/bin/winpr-makecert
+/V3/usr/bin/wlfreerdp
+/V3/usr/bin/xfreerdp
 /usr/bin/freerdp-proxy
 /usr/bin/freerdp-shadow-cli
 /usr/bin/winpr-hash
@@ -189,6 +241,14 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
+/V3/usr/lib64/libfreerdp-client2.so
+/V3/usr/lib64/libfreerdp-server2.so
+/V3/usr/lib64/libfreerdp-shadow-subsystem2.so
+/V3/usr/lib64/libfreerdp-shadow2.so
+/V3/usr/lib64/libfreerdp2.so
+/V3/usr/lib64/libuwac0.so
+/V3/usr/lib64/libwinpr-tools2.so
+/V3/usr/lib64/libwinpr2.so
 /usr/include/freerdp2/freerdp/addin.h
 /usr/include/freerdp2/freerdp/altsec.h
 /usr/include/freerdp2/freerdp/api.h
@@ -452,6 +512,22 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
+/V3/usr/lib64/libfreerdp-client2.so.2
+/V3/usr/lib64/libfreerdp-client2.so.2.10.0
+/V3/usr/lib64/libfreerdp-server2.so.2
+/V3/usr/lib64/libfreerdp-server2.so.2.10.0
+/V3/usr/lib64/libfreerdp-shadow-subsystem2.so.2
+/V3/usr/lib64/libfreerdp-shadow-subsystem2.so.2.10.0
+/V3/usr/lib64/libfreerdp-shadow2.so.2
+/V3/usr/lib64/libfreerdp-shadow2.so.2.10.0
+/V3/usr/lib64/libfreerdp2.so.2
+/V3/usr/lib64/libfreerdp2.so.2.10.0
+/V3/usr/lib64/libuwac0.so.0
+/V3/usr/lib64/libuwac0.so.0.1.1
+/V3/usr/lib64/libwinpr-tools2.so.2
+/V3/usr/lib64/libwinpr-tools2.so.2.10.0
+/V3/usr/lib64/libwinpr2.so.2
+/V3/usr/lib64/libwinpr2.so.2.10.0
 /usr/lib64/libfreerdp-client2.so.2
 /usr/lib64/libfreerdp-client2.so.2.10.0
 /usr/lib64/libfreerdp-server2.so.2
