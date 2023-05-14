@@ -5,7 +5,7 @@
 #
 Name     : FreeRDP
 Version  : 2.10.0
-Release  : 35
+Release  : 36
 URL      : https://github.com/FreeRDP/FreeRDP/releases/download/2.10.0/freerdp-2.10.0.tar.gz
 Source0  : https://github.com/FreeRDP/FreeRDP/releases/download/2.10.0/freerdp-2.10.0.tar.gz
 Summary  : Free implementation of the Remote Desktop Protocol (RDP)
@@ -63,7 +63,6 @@ BuildRequires : systemd-dev
 # Suppress stripping binaries
 %define __strip /bin/true
 %define debug_package %{nil}
-Patch1: no-rc4.patch
 
 %description
 FreeRDP is a open and free implementation of the Remote Desktop Protocol (RDP).
@@ -118,14 +117,13 @@ man components for the FreeRDP package.
 %prep
 %setup -q -n freerdp-2.10.0
 cd %{_builddir}/freerdp-2.10.0
-%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683653429
+export SOURCE_DATE_EPOCH=1684026030
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -208,7 +206,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1683653429
+export SOURCE_DATE_EPOCH=1684026030
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/FreeRDP
 cp %{_builddir}/freerdp-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/FreeRDP/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
