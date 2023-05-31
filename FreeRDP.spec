@@ -5,7 +5,7 @@
 #
 Name     : FreeRDP
 Version  : 2.10.0
-Release  : 36
+Release  : 37
 URL      : https://github.com/FreeRDP/FreeRDP/releases/download/2.10.0/freerdp-2.10.0.tar.gz
 Source0  : https://github.com/FreeRDP/FreeRDP/releases/download/2.10.0/freerdp-2.10.0.tar.gz
 Summary  : Free implementation of the Remote Desktop Protocol (RDP)
@@ -123,7 +123,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1684026030
+export SOURCE_DATE_EPOCH=1685504803
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -206,7 +206,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1684026030
+export SOURCE_DATE_EPOCH=1685504803
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/FreeRDP
 cp %{_builddir}/freerdp-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/FreeRDP/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
@@ -239,14 +239,6 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
-/V3/usr/lib64/libfreerdp-client2.so
-/V3/usr/lib64/libfreerdp-server2.so
-/V3/usr/lib64/libfreerdp-shadow-subsystem2.so
-/V3/usr/lib64/libfreerdp-shadow2.so
-/V3/usr/lib64/libfreerdp2.so
-/V3/usr/lib64/libuwac0.so
-/V3/usr/lib64/libwinpr-tools2.so
-/V3/usr/lib64/libwinpr2.so
 /usr/include/freerdp2/freerdp/addin.h
 /usr/include/freerdp2/freerdp/altsec.h
 /usr/include/freerdp2/freerdp/api.h
@@ -510,21 +502,13 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libfreerdp-client2.so.2
 /V3/usr/lib64/libfreerdp-client2.so.2.10.0
-/V3/usr/lib64/libfreerdp-server2.so.2
 /V3/usr/lib64/libfreerdp-server2.so.2.10.0
-/V3/usr/lib64/libfreerdp-shadow-subsystem2.so.2
 /V3/usr/lib64/libfreerdp-shadow-subsystem2.so.2.10.0
-/V3/usr/lib64/libfreerdp-shadow2.so.2
 /V3/usr/lib64/libfreerdp-shadow2.so.2.10.0
-/V3/usr/lib64/libfreerdp2.so.2
 /V3/usr/lib64/libfreerdp2.so.2.10.0
-/V3/usr/lib64/libuwac0.so.0
 /V3/usr/lib64/libuwac0.so.0.1.1
-/V3/usr/lib64/libwinpr-tools2.so.2
 /V3/usr/lib64/libwinpr-tools2.so.2.10.0
-/V3/usr/lib64/libwinpr2.so.2
 /V3/usr/lib64/libwinpr2.so.2.10.0
 /usr/lib64/libfreerdp-client2.so.2
 /usr/lib64/libfreerdp-client2.so.2.10.0
