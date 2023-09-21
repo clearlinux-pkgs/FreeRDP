@@ -4,10 +4,10 @@
 # Using build pattern: cmake
 #
 Name     : FreeRDP
-Version  : 2.11.1
-Release  : 39
-URL      : https://github.com/FreeRDP/FreeRDP/releases/download/2.11.1/freerdp-2.11.1.tar.gz
-Source0  : https://github.com/FreeRDP/FreeRDP/releases/download/2.11.1/freerdp-2.11.1.tar.gz
+Version  : 2.11.2
+Release  : 40
+URL      : https://github.com/FreeRDP/FreeRDP/archive/2.11.2/FreeRDP-2.11.2.tar.gz
+Source0  : https://github.com/FreeRDP/FreeRDP/archive/2.11.2/FreeRDP-2.11.2.tar.gz
 Summary  : Free implementation of the Remote Desktop Protocol (RDP)
 Group    : Development/Tools
 License  : Apache-2.0
@@ -115,15 +115,15 @@ man components for the FreeRDP package.
 
 
 %prep
-%setup -q -n freerdp-2.11.1
-cd %{_builddir}/freerdp-2.11.1
+%setup -q -n FreeRDP-2.11.2
+cd %{_builddir}/FreeRDP-2.11.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1693948544
+export SOURCE_DATE_EPOCH=1695323931
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -206,11 +206,11 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1693948544
+export SOURCE_DATE_EPOCH=1695323931
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/FreeRDP
-cp %{_builddir}/freerdp-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/FreeRDP/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
-cp %{_builddir}/freerdp-%{version}/winpr/libwinpr/sysinfo/cpufeatures/NOTICE %{buildroot}/usr/share/package-licenses/FreeRDP/ec4468ecfe59c46406d4fc5aca1cee2a83c4d93e || :
+cp %{_builddir}/FreeRDP-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/FreeRDP/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
+cp %{_builddir}/FreeRDP-%{version}/winpr/libwinpr/sysinfo/cpufeatures/NOTICE %{buildroot}/usr/share/package-licenses/FreeRDP/ec4468ecfe59c46406d4fc5aca1cee2a83c4d93e || :
 pushd clr-build-avx2
 %make_install_v3  || :
 popd
@@ -502,30 +502,30 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libfreerdp-client2.so.2.11.1
-/V3/usr/lib64/libfreerdp-server2.so.2.11.1
-/V3/usr/lib64/libfreerdp-shadow-subsystem2.so.2.11.1
-/V3/usr/lib64/libfreerdp-shadow2.so.2.11.1
-/V3/usr/lib64/libfreerdp2.so.2.11.1
+/V3/usr/lib64/libfreerdp-client2.so.2.11.2
+/V3/usr/lib64/libfreerdp-server2.so.2.11.2
+/V3/usr/lib64/libfreerdp-shadow-subsystem2.so.2.11.2
+/V3/usr/lib64/libfreerdp-shadow2.so.2.11.2
+/V3/usr/lib64/libfreerdp2.so.2.11.2
 /V3/usr/lib64/libuwac0.so.0.2.0
-/V3/usr/lib64/libwinpr-tools2.so.2.11.1
-/V3/usr/lib64/libwinpr2.so.2.11.1
+/V3/usr/lib64/libwinpr-tools2.so.2.11.2
+/V3/usr/lib64/libwinpr2.so.2.11.2
 /usr/lib64/libfreerdp-client2.so.2
-/usr/lib64/libfreerdp-client2.so.2.11.1
+/usr/lib64/libfreerdp-client2.so.2.11.2
 /usr/lib64/libfreerdp-server2.so.2
-/usr/lib64/libfreerdp-server2.so.2.11.1
+/usr/lib64/libfreerdp-server2.so.2.11.2
 /usr/lib64/libfreerdp-shadow-subsystem2.so.2
-/usr/lib64/libfreerdp-shadow-subsystem2.so.2.11.1
+/usr/lib64/libfreerdp-shadow-subsystem2.so.2.11.2
 /usr/lib64/libfreerdp-shadow2.so.2
-/usr/lib64/libfreerdp-shadow2.so.2.11.1
+/usr/lib64/libfreerdp-shadow2.so.2.11.2
 /usr/lib64/libfreerdp2.so.2
-/usr/lib64/libfreerdp2.so.2.11.1
+/usr/lib64/libfreerdp2.so.2.11.2
 /usr/lib64/libuwac0.so.0
 /usr/lib64/libuwac0.so.0.2.0
 /usr/lib64/libwinpr-tools2.so.2
-/usr/lib64/libwinpr-tools2.so.2.11.1
+/usr/lib64/libwinpr-tools2.so.2.11.2
 /usr/lib64/libwinpr2.so.2
-/usr/lib64/libwinpr2.so.2.11.1
+/usr/lib64/libwinpr2.so.2.11.2
 
 %files license
 %defattr(0644,root,root,0755)
