@@ -25,3 +25,7 @@ openssl-dev
 pcsc-lite-dev
 pkgconfig(xcursor)
 systemd-dev
+SDL2-dev
+opus-dev
+SDL2_ttf-dev
+opusfile-dev

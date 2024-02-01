@@ -7,3 +7,6 @@ libavresample
 libavutil
 libpcsclite
 openh264
+heimdal-krb5
+liburiparser
+webkit2gtk-4.0
