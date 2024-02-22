@@ -2463,6 +2463,9 @@ libwinpr3.so.3:winpr_MoveFile
 libwinpr3.so.3:winpr_MoveFileEx
 libwinpr3.so.3:winpr_NCryptOpenStorageProviderEx
 libwinpr3.so.3:winpr_NCryptSecurityStatusError
+libwinpr3.so.3:winpr_ObjectStringClone
+libwinpr3.so.3:winpr_ObjectStringFree
+libwinpr3.so.3:winpr_ObjectWStringClone
 libwinpr3.so.3:winpr_PathFileExists
 libwinpr3.so.3:winpr_PathMakePath
 libwinpr3.so.3:winpr_RAND
@@ -2511,11 +2514,17 @@ libwinpr3.so.3:winpr_get_build_config
 libwinpr3.so.3:winpr_get_build_revision
 libwinpr3.so.3:winpr_get_version
 libwinpr3.so.3:winpr_get_version_string
+libwinpr3.so.3:winpr_image_equal
+libwinpr3.so.3:winpr_image_format_extension
+libwinpr3.so.3:winpr_image_format_is_supported
+libwinpr3.so.3:winpr_image_format_mime
 libwinpr3.so.3:winpr_image_free
 libwinpr3.so.3:winpr_image_new
 libwinpr3.so.3:winpr_image_read
 libwinpr3.so.3:winpr_image_read_buffer
 libwinpr3.so.3:winpr_image_write
+libwinpr3.so.3:winpr_image_write_buffer
+libwinpr3.so.3:winpr_image_write_ex
 libwinpr3.so.3:winpr_log_backtrace
 libwinpr3.so.3:winpr_log_backtrace_ex
 libwinpr3.so.3:winpr_md_type_from_string
