@@ -6,10 +6,10 @@
 # autospec commit: 2659038
 #
 Name     : FreeRDP
-Version  : 3.6.2
-Release  : 45
-URL      : https://github.com/FreeRDP/FreeRDP/archive/3.6.2/FreeRDP-3.6.2.tar.gz
-Source0  : https://github.com/FreeRDP/FreeRDP/archive/3.6.2/FreeRDP-3.6.2.tar.gz
+Version  : 3.6.3
+Release  : 46
+URL      : https://github.com/FreeRDP/FreeRDP/archive/3.6.3/FreeRDP-3.6.3.tar.gz
+Source0  : https://github.com/FreeRDP/FreeRDP/archive/3.6.3/FreeRDP-3.6.3.tar.gz
 Summary  : Free implementation of the Remote Desktop Protocol (RDP)
 Group    : Development/Tools
 License  : Apache-2.0
@@ -136,10 +136,10 @@ license components for the FreeRDP package.
 
 
 %prep
-%setup -q -n FreeRDP-3.6.2
-cd %{_builddir}/FreeRDP-3.6.2
+%setup -q -n FreeRDP-3.6.3
+cd %{_builddir}/FreeRDP-3.6.3
 pushd ..
-cp -a FreeRDP-3.6.2 buildavx2
+cp -a FreeRDP-3.6.3 buildavx2
 popd
 
 %build
@@ -147,7 +147,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1720101485
+export SOURCE_DATE_EPOCH=1720451942
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -261,7 +261,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1720101485
+export SOURCE_DATE_EPOCH=1720451942
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/FreeRDP
 cp %{_builddir}/FreeRDP-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/FreeRDP/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
@@ -638,39 +638,39 @@ popd
 /V3/usr/lib64/freerdp3/proxy/proxy-bitmap-filter-plugin.so
 /V3/usr/lib64/freerdp3/proxy/proxy-demo-plugin.so
 /V3/usr/lib64/freerdp3/proxy/proxy-dyn-channel-dump-plugin.so
-/V3/usr/lib64/libfreerdp-client3.so.3.6.2
-/V3/usr/lib64/libfreerdp-server-proxy3.so.3.6.2
-/V3/usr/lib64/libfreerdp-server3.so.3.6.2
-/V3/usr/lib64/libfreerdp-shadow-subsystem3.so.3.6.2
-/V3/usr/lib64/libfreerdp-shadow3.so.3.6.2
-/V3/usr/lib64/libfreerdp3.so.3.6.2
+/V3/usr/lib64/libfreerdp-client3.so.3.6.3
+/V3/usr/lib64/libfreerdp-server-proxy3.so.3.6.3
+/V3/usr/lib64/libfreerdp-server3.so.3.6.3
+/V3/usr/lib64/libfreerdp-shadow-subsystem3.so.3.6.3
+/V3/usr/lib64/libfreerdp-shadow3.so.3.6.3
+/V3/usr/lib64/libfreerdp3.so.3.6.3
 /V3/usr/lib64/librdtk0.so.0.2.0
 /V3/usr/lib64/libuwac0.so.0.2.0
-/V3/usr/lib64/libwinpr-tools3.so.3.6.2
-/V3/usr/lib64/libwinpr3.so.3.6.2
+/V3/usr/lib64/libwinpr-tools3.so.3.6.3
+/V3/usr/lib64/libwinpr3.so.3.6.3
 /usr/lib64/freerdp3/proxy/proxy-bitmap-filter-plugin.so
 /usr/lib64/freerdp3/proxy/proxy-demo-plugin.so
 /usr/lib64/freerdp3/proxy/proxy-dyn-channel-dump-plugin.so
 /usr/lib64/libfreerdp-client3.so.3
-/usr/lib64/libfreerdp-client3.so.3.6.2
+/usr/lib64/libfreerdp-client3.so.3.6.3
 /usr/lib64/libfreerdp-server-proxy3.so.3
-/usr/lib64/libfreerdp-server-proxy3.so.3.6.2
+/usr/lib64/libfreerdp-server-proxy3.so.3.6.3
 /usr/lib64/libfreerdp-server3.so.3
-/usr/lib64/libfreerdp-server3.so.3.6.2
+/usr/lib64/libfreerdp-server3.so.3.6.3
 /usr/lib64/libfreerdp-shadow-subsystem3.so.3
-/usr/lib64/libfreerdp-shadow-subsystem3.so.3.6.2
+/usr/lib64/libfreerdp-shadow-subsystem3.so.3.6.3
 /usr/lib64/libfreerdp-shadow3.so.3
-/usr/lib64/libfreerdp-shadow3.so.3.6.2
+/usr/lib64/libfreerdp-shadow3.so.3.6.3
 /usr/lib64/libfreerdp3.so.3
-/usr/lib64/libfreerdp3.so.3.6.2
+/usr/lib64/libfreerdp3.so.3.6.3
 /usr/lib64/librdtk0.so.0
 /usr/lib64/librdtk0.so.0.2.0
 /usr/lib64/libuwac0.so.0
 /usr/lib64/libuwac0.so.0.2.0
 /usr/lib64/libwinpr-tools3.so.3
-/usr/lib64/libwinpr-tools3.so.3.6.2
+/usr/lib64/libwinpr-tools3.so.3.6.3
 /usr/lib64/libwinpr3.so.3
-/usr/lib64/libwinpr3.so.3.6.2
+/usr/lib64/libwinpr3.so.3.6.3
 
 %files license
 %defattr(0644,root,root,0755)
