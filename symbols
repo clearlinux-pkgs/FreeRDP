@@ -2171,6 +2171,7 @@ libwinpr3.so.3:ValidFileNameComponent
 libwinpr3.so.3:WINPR_JSON_AddArrayToObject
 libwinpr3.so.3:WINPR_JSON_AddBoolToObject
 libwinpr3.so.3:WINPR_JSON_AddFalseToObject
+libwinpr3.so.3:WINPR_JSON_AddItemToArray
 libwinpr3.so.3:WINPR_JSON_AddNullToObject
 libwinpr3.so.3:WINPR_JSON_AddNumberToObject
 libwinpr3.so.3:WINPR_JSON_AddObjectToObject
