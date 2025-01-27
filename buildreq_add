@@ -21,6 +21,7 @@ libusb-dev
 libxkbfile-dev
 libxshmfence-dev
 libxslt-dev
+not-ffmpeg-dev
 openssl-dev
 pcsc-lite-dev
 pkgconfig(xcursor)

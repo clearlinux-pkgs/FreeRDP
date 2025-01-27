@@ -59,9 +59,11 @@ libfreerdp-client3.so.3:freerdp_client_pen_cancel_all
 libfreerdp-client3.so.3:freerdp_client_populate_rdp_file_from_settings
 libfreerdp-client3.so.3:freerdp_client_populate_settings_from_rdp_file
 libfreerdp-client3.so.3:freerdp_client_print_buildconfig
+libfreerdp-client3.so.3:freerdp_client_print_buildconfig_ex
 libfreerdp-client3.so.3:freerdp_client_print_command_line_help
 libfreerdp-client3.so.3:freerdp_client_print_command_line_help_ex
 libfreerdp-client3.so.3:freerdp_client_print_version
+libfreerdp-client3.so.3:freerdp_client_print_version_ex
 libfreerdp-client3.so.3:freerdp_client_rdp_file_free
 libfreerdp-client3.so.3:freerdp_client_rdp_file_get_integer_option
 libfreerdp-client3.so.3:freerdp_client_rdp_file_get_string_option
@@ -79,6 +81,7 @@ libfreerdp-client3.so.3:freerdp_client_settings_parse_assistance_file
 libfreerdp-client3.so.3:freerdp_client_settings_parse_command_line
 libfreerdp-client3.so.3:freerdp_client_settings_parse_command_line_arguments
 libfreerdp-client3.so.3:freerdp_client_settings_parse_command_line_arguments_ex
+libfreerdp-client3.so.3:freerdp_client_settings_parse_command_line_ex
 libfreerdp-client3.so.3:freerdp_client_settings_parse_connection_file
 libfreerdp-client3.so.3:freerdp_client_settings_parse_connection_file_buffer
 libfreerdp-client3.so.3:freerdp_client_settings_write_connection_file
@@ -454,6 +457,7 @@ libfreerdp3.so.3:er_write_octet_string_tag
 libfreerdp3.so.3:er_write_sequence_tag
 libfreerdp3.so.3:er_write_universal_tag
 libfreerdp3.so.3:free_h264_metablock
+libfreerdp3.so.3:freerdp_GetConfigFilePath
 libfreerdp3.so.3:freerdp_abort_connect
 libfreerdp3.so.3:freerdp_abort_connect_context
 libfreerdp3.so.3:freerdp_abort_event
@@ -496,6 +500,7 @@ libfreerdp3.so.3:freerdp_certificate_data_get_hash
 libfreerdp3.so.3:freerdp_certificate_data_get_host
 libfreerdp3.so.3:freerdp_certificate_data_get_issuer
 libfreerdp3.so.3:freerdp_certificate_data_get_pem
+libfreerdp3.so.3:freerdp_certificate_data_get_pem_ex
 libfreerdp3.so.3:freerdp_certificate_data_get_port
 libfreerdp3.so.3:freerdp_certificate_data_get_subject
 libfreerdp3.so.3:freerdp_certificate_data_hash
@@ -515,10 +520,12 @@ libfreerdp3.so.3:freerdp_certificate_get_hash
 libfreerdp3.so.3:freerdp_certificate_get_issuer
 libfreerdp3.so.3:freerdp_certificate_get_param
 libfreerdp3.so.3:freerdp_certificate_get_pem
+libfreerdp3.so.3:freerdp_certificate_get_pem_ex
 libfreerdp3.so.3:freerdp_certificate_get_public_key
 libfreerdp3.so.3:freerdp_certificate_get_signature_alg
 libfreerdp3.so.3:freerdp_certificate_get_subject
 libfreerdp3.so.3:freerdp_certificate_get_upn
+libfreerdp3.so.3:freerdp_certificate_get_validity
 libfreerdp3.so.3:freerdp_certificate_is_rdp_security_compatible
 libfreerdp3.so.3:freerdp_certificate_is_rsa
 libfreerdp3.so.3:freerdp_certificate_new
@@ -550,6 +557,8 @@ libfreerdp3.so.3:freerdp_channels_load_plugin
 libfreerdp3.so.3:freerdp_channels_process_pending_messages
 libfreerdp3.so.3:freerdp_check_event_handles
 libfreerdp3.so.3:freerdp_check_fds
+libfreerdp3.so.3:freerdp_client_channel_register
+libfreerdp3.so.3:freerdp_client_channel_unregister
 libfreerdp3.so.3:freerdp_client_codecs_free
 libfreerdp3.so.3:freerdp_client_codecs_new
 libfreerdp3.so.3:freerdp_client_codecs_prepare
@@ -588,6 +597,7 @@ libfreerdp3.so.3:freerdp_dynamic_channel_collection_free
 libfreerdp3.so.3:freerdp_encryption_level_string
 libfreerdp3.so.3:freerdp_encryption_methods_string
 libfreerdp3.so.3:freerdp_error_info
+libfreerdp3.so.3:freerdp_extract_key_value
 libfreerdp3.so.3:freerdp_focus_required
 libfreerdp3.so.3:freerdp_free
 libfreerdp3.so.3:freerdp_get_build_config
@@ -685,6 +695,9 @@ libfreerdp3.so.3:freerdp_message_queue_process_message
 libfreerdp3.so.3:freerdp_message_queue_process_pending_messages
 libfreerdp3.so.3:freerdp_nego_get_routing_token
 libfreerdp3.so.3:freerdp_new
+libfreerdp3.so.3:freerdp_nla_QueryContextAttributes
+libfreerdp3.so.3:freerdp_nla_decrypt
+libfreerdp3.so.3:freerdp_nla_encrypt
 libfreerdp3.so.3:freerdp_nla_impersonate
 libfreerdp3.so.3:freerdp_nla_revert_to_self
 libfreerdp3.so.3:freerdp_passphrase_read
@@ -777,6 +790,11 @@ libfreerdp3.so.3:freerdp_target_net_addresses_copy
 libfreerdp3.so.3:freerdp_target_net_addresses_free
 libfreerdp3.so.3:freerdp_update_gateway_usage_method
 libfreerdp3.so.3:freerdp_utils_aad_get_access_token
+libfreerdp3.so.3:freerdp_utils_aad_get_wellknown_custom_object
+libfreerdp3.so.3:freerdp_utils_aad_get_wellknown_custom_string
+libfreerdp3.so.3:freerdp_utils_aad_get_wellknown_object
+libfreerdp3.so.3:freerdp_utils_aad_get_wellknown_string
+libfreerdp3.so.3:freerdp_utils_aad_wellknwon_value_name
 libfreerdp3.so.3:freerdp_write_four_byte_float
 libfreerdp3.so.3:freerdp_write_four_byte_signed_integer
 libfreerdp3.so.3:gdi_BitBlt
@@ -945,6 +963,7 @@ libfreerdp3.so.3:rdpdr_packetid_string
 libfreerdp3.so.3:rdpdr_read_capset_header
 libfreerdp3.so.3:rdpdr_write_capset_header
 libfreerdp3.so.3:rdpdr_write_iocompletion_header
+libfreerdp3.so.3:rdpgfx_caps_version_str
 libfreerdp3.so.3:rdpgfx_get_cmd_id_string
 libfreerdp3.so.3:rdpgfx_get_codec_id_string
 libfreerdp3.so.3:rectangle_is_empty
@@ -1097,6 +1116,8 @@ libfreerdp3.so.3:stream_dump_get
 libfreerdp3.so.3:stream_dump_new
 libfreerdp3.so.3:stream_dump_register_handlers
 libfreerdp3.so.3:transport_get_context
+libfreerdp3.so.3:transport_layer_free
+libfreerdp3.so.3:transport_layer_new
 libfreerdp3.so.3:transport_parse_pdu
 libfreerdp3.so.3:utf8_string_to_rail_string
 libfreerdp3.so.3:yuv420_context_decode
@@ -1281,6 +1302,7 @@ libwinpr3.so.3:CommandLineParseArgumentsA
 libwinpr3.so.3:CommandLineParseArgumentsW
 libwinpr3.so.3:CommandLineParseCommaSeparatedValues
 libwinpr3.so.3:CommandLineParseCommaSeparatedValuesEx
+libwinpr3.so.3:CommandLineParserFree
 libwinpr3.so.3:CommandLineToArgvA
 libwinpr3.so.3:CommandLineToArgvW
 libwinpr3.so.3:CommandLineToCommaSeparatedValues
@@ -2101,6 +2123,8 @@ libwinpr3.so.3:StreamPool_GetStatistics
 libwinpr3.so.3:StreamPool_New
 libwinpr3.so.3:StreamPool_Return
 libwinpr3.so.3:StreamPool_Take
+libwinpr3.so.3:StreamPool_UsedCount
+libwinpr3.so.3:StreamPool_WaitForReturn
 libwinpr3.so.3:Stream_AddRef
 libwinpr3.so.3:Stream_CheckAndLogRequiredCapacityEx
 libwinpr3.so.3:Stream_CheckAndLogRequiredCapacityExVa
@@ -2457,6 +2481,7 @@ libwinpr3.so.3:string_list_free
 libwinpr3.so.3:string_list_length
 libwinpr3.so.3:string_list_print
 libwinpr3.so.3:strtok_s
+libwinpr3.so.3:wcsndup
 libwinpr3.so.3:wcstok_s
 libwinpr3.so.3:winpr_BinToHexString
 libwinpr3.so.3:winpr_BinToHexStringBuffer
@@ -2467,6 +2492,7 @@ libwinpr3.so.3:winpr_Cipher_BytesToKey
 libwinpr3.so.3:winpr_Cipher_Final
 libwinpr3.so.3:winpr_Cipher_Free
 libwinpr3.so.3:winpr_Cipher_New
+libwinpr3.so.3:winpr_Cipher_NewEx
 libwinpr3.so.3:winpr_Cipher_SetPadding
 libwinpr3.so.3:winpr_Cipher_Update
 libwinpr3.so.3:winpr_CleanupSSL
@@ -2500,6 +2526,7 @@ libwinpr3.so.3:winpr_DisassociateCurrentThreadFromCallback
 libwinpr3.so.3:winpr_EnterSynchronizationBarrier
 libwinpr3.so.3:winpr_FIPSMode
 libwinpr3.so.3:winpr_FreeLibraryWhenCallbackReturns
+libwinpr3.so.3:winpr_GetConfigFilePath
 libwinpr3.so.3:winpr_GetTickCount64
 libwinpr3.so.3:winpr_GetTickCount64NS
 libwinpr3.so.3:winpr_GetUnixTimeNS
@@ -2571,6 +2598,8 @@ libwinpr3.so.3:winpr_backtrace_symbols_fd
 libwinpr3.so.3:winpr_bitmap_construct_header
 libwinpr3.so.3:winpr_bitmap_write
 libwinpr3.so.3:winpr_bitmap_write_ex
+libwinpr3.so.3:winpr_cipher_type_from_string
+libwinpr3.so.3:winpr_cipher_type_to_string
 libwinpr3.so.3:winpr_fopen
 libwinpr3.so.3:winpr_get_build_config
 libwinpr3.so.3:winpr_get_build_revision
