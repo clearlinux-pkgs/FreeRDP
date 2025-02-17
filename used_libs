@@ -1,8 +1,5 @@
 ld-linux-x86-64.so.2
-libSDL2-2.0.so.0
-libSDL2_ttf-2.0.so.0
 libX11.so.6
-libXcursor.so.1
 libXtst.so.6
 libasound.so.2
 libc.so.6
